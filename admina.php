@@ -1,4 +1,6 @@
 <?php
+
+
 define('M_ADMIN', TRUE);
 define('NOROBOT', TRUE);
 include_once dirname(__FILE__).'/include/general.inc.php';
