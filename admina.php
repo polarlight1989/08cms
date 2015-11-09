@@ -1,5 +1,5 @@
 <?php
-define('M_ADMIN', TRUE);
+define('M_ADMIN', TRUE); 
 define('NOROBOT', TRUE);
 include_once dirname(__FILE__).'/include/general.inc.php';
 include_once M_ROOT.'./include/admin.fun.php';
