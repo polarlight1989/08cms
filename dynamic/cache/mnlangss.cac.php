@@ -1,0 +1,28 @@
+<?php
+$mnlangss_0 = array (
+  'menutype_2' => '常规内容',
+  'menuitem_2' => '内容管理',
+  'menutype_23' => '其他管理',
+  'menuitem_90' => '页面静态',
+  'menuitem_71' => '采集管理',
+  'menuitem_91' => '问吧相关',
+  'menuitem_92' => '商品记录',
+  'menutype_20' => '网站架构',
+  'menuitem_62' => '子站参数',
+  'menuitem_63' => '子站路径',
+  'menuitem_67' => '栏目管理',
+  'menuitem_68' => '节点管理',
+  'menuitem_66' => '文档模型',
+  'menuitem_70' => '文档交互设置',
+  'menuitem_114' => '重建子站缓存',
+  'menutype_21' => '模板风格',
+  'menuitem_98' => '模板设置',
+  'menuitem_110' => '常用标识',
+  'menuitem_72' => '模板相关',
+  'menuitem_73' => '原始标识',
+  'menuitem_74' => '特殊标识',
+  'menuitem_75' => '复合标识',
+  'menuitem_76' => '分页标识',
+  'menuitem_77' => '区块标识',
+) ;
+?>

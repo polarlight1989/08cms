@@ -1,0 +1,53 @@
+body {position:relative;text-align:center;font-family:"宋体",arial;margin:0 auto;padding:0;font-size:12px;color:#333;}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;border:0;}
+#loading{margin:200px auto}
+/*#content{height:440px; overflow:auto}*/
+#btn_ok{ margin-top:10px;}
+ul,li{list-style-type:none;}
+img{vertical-align:top; border:0;}
+strong{font-weight:normal;}
+em{font-style:normal;}
+h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-size:12px;font-weight:normal;}
+textarea {overflow:auto;}
+cite {float:right; font-style:normal;}
+.blank{ height:0px; clear:both;display:block; font-size:0px;overflow:hidden;}
+
+.cataarea a:link {color: #134d9d; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cataarea a:hover {color: #076fff;  padding:2px 0px;text-decoration:none;}/*鼠标移上去的颜色*/
+.cataarea a:active {color: #103d7c; padding:2px 0px;}/*单击之后下压的过程的颜色*/
+.cataarea a:visited {color: #006bff;text-decoration:none;}/*点击过的颜色*/
+
+.cataarea { float:left; width:152px; background:#FFF; padding:3px;}
+.cataarea h1 { width:150px; height:27px; line-height:28px; text-align:center; font-size:14px; font-weight:700; color:#FFF; background:#134d9d; border:1px solid #134d9d; overflow:hidden;}
+.cataarea h1 a:link {color: #FFF; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cataarea h1 a:hover {color: #FFF; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cataarea h1 a:visited {color: #FFF;padding:2px 0px; ext-decoration:none;}/*点击过的颜色*/
+.cataarea h1.h1selecting {background:url(h1selecting.gif) 1px center no-repeat #134d9d; ;}
+
+.cataarea ul li{width:150px; color:#666; height:22px; text-align:center; line-height:22px;  overflow:hidden;}
+.cl1{ font-size:14px;color:#134d9d; border:1px solid #134d9d; border-top:none; background:#F9F9F9;}
+.cl1 a:link {color: #134d9d; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cl1 a:hover {color: #076fff; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+
+.cl2{ font-size:12px; font-weight:normal; color:#134d9d; border:1px dotted #1a6de0; border-top:none; background:#e3f6fc;}
+.cl2 a:link {color: #134d9d; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cl2 a:hover {color: #076fff; padding:2px 0px; border-bottom-color:#076fff; text-decoration:none;}/*有连接的颜色*/
+
+.cl3{ font-size:12px; font-weight:normal; border:1px dashed #666;border-top:none;  background:#FFF;}
+.cl4{ font-size:12px; font-weight:normal; border:1px dashed #1a6de0;border-top:none;  background:#FFF;}
+.cl5{ font-size:12px; font-weight:normal; border:1px dashed #1a6de0;border-top:none;  background:#FFF;}
+.cl3 a:link,.cl4 a:link ,.cl5 a:link  {color: #1a6de0; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.cl3 a:hover,.cl4 a:hover,.cl5 a:hover {color: #076fff; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+
+.cataarea .nLower{ color:#666; background:#e2e2e2;border-color:4194fd;cursor:default;} /* border:1px solid #4194fd;  有下级的 但本身没有添加权限*/
+
+.yhLower{ color:#134d9d; font-weight:600; background:#f5f9fd;  border-color:1a6de0;}/*border:1px solid #1a6de0; 有下级的 本身也有添加权限*/
+.yhLower a:link {color: #134d9d; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+.yhLower a:hover {color: #076fff; padding:2px 0px; text-decoration:none;}/*有连接的颜色*/
+
+.cGray{ color:#CCC; font-size:12px; font-weight:normal;}
+
+.selecting{ background:url(selecting.gif) 2px center no-repeat #fff;}
+.rlsbg {background:url(h1selecting.gif) 1px center no-repeat #134d9d; ;}
+
+.selectitem a{background:url(selecting.gif) 2px 0px no-repeat #fff;float:left;margin:0 0 5px 5px;width:253px;height:22px; text-align:left; text-indent:24px; line-height:22px; white-space:nowrap; border:1px solid #134d9d; cursor:pointer; overflow:hidden}

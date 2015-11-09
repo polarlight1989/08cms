@@ -1,0 +1,679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<title>08CMS模板标识参考文档</title>
+<style type="text/css">
+body,form,td,div{
+	font-size: 12px;
+	font-family:宋体;
+	line-height:150%;
+	margin:0px;
+	padding:0px;
+}
+body{
+	position:relative;
+	width:900px;
+	margin:0px auto;
+}
+div{
+	position:relative;
+}
+div.bd{
+	margin:10px auto 0px auto;
+	padding:5px;
+	border:1px solid #DAEDF9;
+	border-bottom:none;
+}
+div.bk{
+	margin:10px auto;
+	border:1px solid #DAEDF9;
+	overflow:hidden;
+}
+div.bk .hd{
+	padding:5px;
+}
+div.bk table{
+	margin-left:-1px;
+}
+div.bk th{
+	padding:5px;
+	background-color:#F1F5F8;
+	border-left:1px solid #DAEDF9;
+	border-top:1px solid #DAEDF9;
+}
+div.bk th.d1{
+	width:180px;
+}
+div.bk th.d2{
+	width:100px;
+}
+div.bk th.d3{
+	width:400px;
+}
+div.bk th.d4{
+	width:180px;
+}
+div.bk td{
+	padding:5px;
+	border-left:1px solid #DAEDF9;
+	border-top:1px solid #DAEDF9;
+}
+div.bk td.dc{
+	background-color:#F1F5F8;
+}
+div.tb{
+	border:1px solid #005584;
+	overflow:hidden;
+}
+div.tb div{
+	margin-left:-1px;
+	margin-top:-1px;
+	border-left:1px solid #005584;
+	border-top:1px solid #005584;
+	padding:5px;
+}
+div.tb .td{
+	float:left;
+}
+div.tb .th{
+	float:left;
+	text-align:center;
+	font-weight:bold;
+}
+div.tb .tr{
+	clear:both;
+	font-size:0px;
+	border:none;
+	padding:0px;
+	width:900px;
+}
+.tbsOn{
+	color:white;
+	background-color:#005584;
+	cursor:default;
+}
+.tbsOff{
+	color:white;
+	background-color:#2982ad;
+	cursor:pointer;
+}
+div.i0{
+	width:889px;
+	height:80px;
+}
+div.i0 a{
+	float:left;
+	display:block;
+	width:100px;
+	color:black;
+	text-decoration:none;
+}
+div.i0 a:link,a:visited{
+}
+div.i0 a:hover{
+	text-decoration:underline;
+}
+div.w1{
+	width:290px;
+}
+div.w2{
+	width:898px;
+}
+div.w3{
+	width:888px;
+}
+div.art{
+	background-color:#D6E7F7;
+}
+.c9{
+	color:#999999;
+}
+</style>
+</head>
+<body>
+<!--u start-->
+<script type="text/javascript" language="javascript">
+function $(id){return document.getElementById(id)}
+function showTable(v){
+	var a=['flag[u]','flag[c]','flag[p]'],
+		e=['item[u]','item[c]','item[p]'],
+		cs=['tbsOff','tbsOn'];
+	for(var i=0;i<a.length;i++){
+		$(a[i]).className='th w1 '+cs[v==a[i]?1:0];
+		$(e[i]).style.display=v==a[i]?'':'none';
+	}
+}
+function showItem(h){
+	if(oShowItem)oShowItem.display='none',o=null;
+	if(h){
+		var o=$(h.substr(1));
+		if(!o)return alert('没有找到指定标识！');
+		oShowItem=o.style;
+		oShowItem.display='';
+	}
+}
+var tpl=[['u','image','图片模块',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['作为对象的原始信息标识名称','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['图片宽度限制','width','[maxwidth=数字/] 例：[maxwidth=100/]','限定最大宽度'],
+ ['图片高度限制','height','[maxheight=数字/] 例：[maxheight=200/]]','限定最大高度'],
+ ['小图片扩展','expand','[expand=1/]','当图片宽度和高度同时小于“图片宽度限制”和“图片高度限制”时，图片按比较放大'],
+ ['空图片url','emptyurl','[emptyurl=图片路径/] 例：[emptyurl=userfiles/image/20090513/13114410b51335b0410216.jpg/]','指定图片不存在时所调用的图片']]],
+ ['u','file','下载模块',[['来源内容模式','tmode','[tmode=1/]','选择所调用字段是独立点下载还是多点下载'],
+ ['来源原始标识名称(单集模式有效)','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称']]],
+ ['u','flash','Flash模块',[['来源内容模式','tmode','[tmode=1/]','选择所调用字段是独立点下载还是多点下载'],
+ ['来源原始标识名称(单集模式有效)','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['播放器宽度','width','[maxwidth=数字/] 例：[maxwidth=100/]','限定最大宽度'],
+ ['播放器高度','height','[maxheight=数字/] 例：[maxheight=200/]]','限定最大高度']]],
+ ['u','media','视频模块',[['来源内容模式','tmode','[tmode=1/]','选择所调用字段是独立点下载还是多点下载'],
+ ['来源原始标识名称(单集模式有效)','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['播放器宽度','width','[maxwidth=数字/] 例：[maxwidth=100/]','限定最大宽度'],
+ ['播放器高度','height','[maxheight=数字/] 例：[maxheight=200/]]','限定最大高度']]],
+ ['u','images','图集列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['作为对象的原始信息标识名称','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['数量限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['图片宽度限制','width','[maxwidth=数字/] 例：[maxwidth=100/]','限定最大宽度'],
+ ['图片高度限制','height','[maxheight=数字/] 例：[maxheight=200/]]','限定最大高度'],
+ ['小图片扩展','expand','[expand=1/]','当图片宽度和高度同时小于“图片宽度限制”和“图片高度限制”时，图片按比较放大'],
+ ['空图片url','emptyurl','[emptyurl=图片路径/] 例：[emptyurl=userfiles/image/20090513/13114410b51335b0410216.jpg/]','指定图片不存在时所调用的图片'],
+ ['行补全图片说明','emptytitle','[emptytitle=文字说明/] 例：[emptytitle=最新图片/]','指定图片说明为空时的说明']]],
+ ['u','files','下载列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['u','flashs','Flash列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['u','medias','视频列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['u','follow','附件链接',[['附件页面类型','type',''],
+ ['来源内容模式','tmode','[tmode=1/]','选择所调用字段是独立点下载还是多点下载'],
+ ['来源原始标识名称(单集模式有效)','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称']]],
+ ['u','date','时间显示标识',[['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['日期显示格式','date','[value=y-m-d/] 例：09-04-07<br />[value=Y-m-d/] 例：2009-04-07<br />[value=m-d-y/] 例：04-07-09<br />[value=m-d-Y/] 例：04-07-2009<br />[value=y-m/] 例：09-04<br />[value=Y-m/] 例：2009-04<br />[value=m-d/] 例：04-07<br />[value=M-d/] 例：Apr-07<br />[value=F-d/] 例：April-07<br />[value=M-d-Y/] 例：Apr-07-09<br />[value=M-d-y/] 例：Apr-07-2009','选定日期显示格式'],
+ ['时间显示格式','time','[value=H:i:s/] 例：14:07:05<br />[value=h:i:s a/] 例：02:07:05 pm<br />[value=H:i/] 例：14:07<br />[value=A h:i/] 例：PM 02:07<br />[value=i:s/] 例：07:05','选定时间显示格式']]],
+ ['u','odeal','文本处理标识',[['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['处理Html代码','dealhtml','[value=clearhtml]:清除Html标签<br />[value=disablehtml/]：仅显示Html标签<br />[value=safehtml/]：保护性过滤Html'],
+ ['文本长度剪裁','trim','[trim=数字/] 例：[trim=5/]','输入字节长度,如为空或0值表示不剪裁'],
+ ['过滤不良词','badword','[badword=1/]'],
+ ['处理关联链接','wordlink',' [wordlink=1/]'],
+ ['多行文本换行','nl2br','[nl2br=1/]'],
+ ['添加混淆字串','randstr','[randstr=1/]']]],
+ ['u','arcfee','文档费用信息',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['费用信息类型','fmode','[fmode=1/]表示为附件处理费用，为空时表示文档浏览费用','当浏览文档需要扣除积分时使用“文档浏览费用”；<br />当下载文档附件需要扣除积分时使用“附件处理费用”'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['u','function','自定函数标识',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码']]],
+ ['c','archives','文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['是否JS动态调用','js','[js=1/]','标识是否启用JS脚本调用。主要使用：该标识调用的信息需要即时更新，(比如调用会员评价信息)，且启用了静态页面功能，这时最好使用JS调用'],
+ ['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目'],
+ ['含子栏目','caidson','栏目限制含子栏目：[caidson=1/]','显示内容是否包含子栏目内容'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型'],
+ ['文档模型限制','chsource','激活类型：[chsource=1/]<br />手动指定类型：[chsource=2/]','选择显示内容的所属文档模型'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['显示附加统计信息','rec','[rec=1/]','当需要使用“列表排序设置”中的“第二排序”和显示“第二排序”的信息时需要启用此功能'],
+ ['会员相关设置'],
+ ['个人文档列表','space','[space=1/]','限制只显示会员发布的信息列表'],
+ ['个人分类限制','ucsource','[ucsource=1/]','限制只显示会员设定的分类信息列表'],
+ ['列表排序设置'],
+ ['第一排序','orderby','[orderby=createdate_desc/] 添加时间↓<br />[orderby=createdate_asc/] 添加时间↑<br />[orderby=clicks_desc/] 点击数↓<br />[orderby=comments_desc/] 评论数↓<br />[orderby=scores_desc/] 平均评分↓<br />[orderby=favorites_desc/] 收藏次数↓<br />[orderby=praises_desc/] 称赞次数↓<br />[orderby=debases_desc/] 贬损次数↓<br />[orderby=orders_desc/] 订单数量↓<br />[orderby=downs_desc/] 下载次数↓<br />[orderby=plays_desc/] 播放次数↓<br />[orderby=currency_desc/] 答疑悬赏↓'],
+ ['第二排序','orderby1','[orderby1=mclicks_desc/] 月点击数↓<br />[orderby1=wclicks_desc/] 周点击数↓<br />[orderby1=mcomments_desc/] 月评论数↓<br />[orderby1=wcomments_desc/] 周评论数↓<br />[orderby1=mfavorites_desc/] 月收藏次数↓<br />[orderby1=wfavorites_desc/] 周收藏次数↓<br />[orderby1=mpraises_desc/] 月称赞次数↓<br />[orderby1=wpraises_desc/] 周称赞次数↓<br />[orderby1=mdebases_desc/] 月贬损次数↓<br />[orderby1=wdebases_desc/] 周贬损次数↓<br />[orderby1=morders_desc/] 月订单数量↓<br />[orderby1=worders_desc/] 周订单数量↓<br />[orderby1=mdowns_desc/] 月下载次数↓<br />[orderby1=wdowns_desc/] 周下载次数↓<br />[orderby1=mplays_desc/] 月播放次数↓<br />[orderby1=wplays_desc/] 周播放次数↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['列表起始位置','startno',' [startno=整字/] 例：[startno=7/]','设置按当前设置的第几条记录开始，默认为0'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['收藏次数>','favorites','[favorites=整数/] 例：[favorites=6/]'],
+ ['称赞次数>','praises','[praises=整数/] 例：[praises=6/]'],
+ ['贬损次数>','debases','[debases=整数/] 例：[debases=6/]'],
+ ['商品订单数量>','orders','[orders=整数/] 例：[orders=6/]'],
+ ['商品价格<=','inprice','[inprice=整数/] 例：[inprice=6/]'],
+ ['商品价格>','outprice','[outprice=整数/] 例：[outprice=6/]'],
+ ['答案数量>','answers','[answers=整数/] 例：[answers=6/]'],
+ ['采用答案数量>','adopts','[adopts=整数/] 例：[adopts=6/]'],
+ ['答疑悬赏积分<=','incurrency','[incurrency=整数/] 例：[incurrency=6/]'],
+ ['答疑悬赏积分>','outcurrency','[outcurrency=整数/] 例：[outcurrency=6/]'],
+ ['答疑是否已关闭','closed','不限：[closed=-1/]<br />未关闭：[closed=0/]<br />已关闭：[closed=1/]'],
+ ['合辑是否完结','abover','不限：[abover=-1/]<br />未完结：[abover=0/]<br />已完结：[abover=1/]'],
+ ['筛选查询字串','wherestr','','SQL判断条件语句，可用系统生成']]],
+ ['c','alarchives','辑内文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目'],
+ ['含子栏目','caidson','栏目限制含子栏目：[caidson=1/]','显示内容是否包含子栏目内容'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型'],
+ ['文档模型限制','chsource','不限类型：<br />手动指定类型：[chsource=1/] [chids=文档模型ID，多个以逗号分开/] 例：[chsource=1/] [chids=7,8/]','选择显示内容的所属文档模型'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['显示附加统计信息','rec','[rec=1/]','当需要使用“列表排序设置”中的“第二排序”和显示“第二排序”的信息时需要启用此功能'],
+ ['列表排序设置'],
+ ['第一排序','orderby','[orderby=createdate_desc/] 添加时间↓<br />[orderby=createdate_asc/] 添加时间↑<br />[orderby=clicks_desc/] 点击数↓<br />[orderby=comments_desc/] 评论数↓<br />[orderby=scores_desc/] 平均评分↓<br />[orderby=favorites_desc/] 收藏次数↓<br />[orderby=praises_desc/] 称赞次数↓<br />[orderby=debases_desc/] 贬损次数↓<br />[orderby=orders_desc/] 订单数量↓<br />[orderby=downs_desc/] 下载次数↓<br />[orderby=plays_desc/] 播放次数↓<br />[orderby=currency_desc/] 答疑悬赏↓'],
+ ['第二排序','orderby1','[orderby1=mclicks_desc/] 月点击数↓<br />[orderby1=wclicks_desc/] 周点击数↓<br />[orderby1=mcomments_desc/] 月评论数↓<br />[orderby1=wcomments_desc/] 周评论数↓<br />[orderby1=mfavorites_desc/] 月收藏次数↓<br />[orderby1=wfavorites_desc/] 周收藏次数↓<br />[orderby1=mpraises_desc/] 月称赞次数↓<br />[orderby1=wpraises_desc/] 周称赞次数↓<br />[orderby1=mdebases_desc/] 月贬损次数↓<br />[orderby1=wdebases_desc/] 周贬损次数↓<br />[orderby1=morders_desc/] 月订单数量↓<br />[orderby1=worders_desc/] 周订单数量↓<br />[orderby1=mdowns_desc/] 月下载次数↓<br />[orderby1=wdowns_desc/] 周下载次数↓<br />[orderby1=mplays_desc/] 月播放次数↓<br />[orderby1=wplays_desc/] 周播放次数↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['列表起始位置','startno',' [startno=整字/] 例：[startno=7/]','设置按当前设置的第几条记录开始，默认为0'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['收藏次数>','favorites','[favorites=整数/] 例：[favorites=6/]'],
+ ['称赞次数>','praises','[praises=整数/] 例：[praises=6/]'],
+ ['贬损次数>','debases','[debases=整数/] 例：[debases=6/]'],
+ ['商品订单数量>','orders','[orders=整数/] 例：[orders=6/]'],
+ ['商品价格<=','inprice','[inprice=整数/] 例：[inprice=6/]'],
+ ['商品价格>','outprice','[outprice=整数/] 例：[outprice=6/]'],
+ ['答案数量>','answers','[answers=整数/] 例：[answers=6/]'],
+ ['采用答案数量>','adopts','[adopts=整数/] 例：[adopts=6/]'],
+ ['答疑悬赏积分<=','incurrency','[incurrency=整数/] 例：[incurrency=6/]'],
+ ['答疑悬赏积分>','outcurrency','[outcurrency=整数/] 例：[outcurrency=6/]'],
+ ['答疑是否已关闭','closed','不限：[closed=-1/]<br />未关闭：[closed=0/]<br />已关闭：[closed=1/]'],
+ ['合辑是否完结','abover','不限：[abover=-1/]<br />未完结：[abover=0/]<br />已完结：[abover=1/]'],
+ ['筛选查询字串','wherestr','','SQL判断条件语句，可用系统生成']]],
+ ['c','searchs','搜索文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['查询字串','sqlstr','[sqlstr=SQL语句/]','通过“内容”->“文档搜索相关”设定相关条件后生成SQL语句，把“复合标识查询字串”的内容复制过来即可'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['c','relates','相关文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['排列顺序','orderby','[orderby=createdate_desc/] 添加时间↓<br />[orderby=createdate_asc/] 添加时间↑<br />[orderby=clicks_desc/] 点击数↓<br />[orderby=comments_desc/] 评论数↓'],
+ ['模型限制','chsource','不限模型：<br />激活类型：[chsource=1/]','选择显示内容的所属文档模型'],
+ ['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目']]],
+ ['c','outinfos','自由调用列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['外部数据源','dsid','当前系统：[dsid=0/]<br />其它外部数据源：[dsid=数据源ID/]','能过“模板”->“外部数据源管理”设定外部数据库连接'],
+ ['定义内容查询字串','sqlstr','[sqlstr=SQL语句/]','通过“外部数据源”->“查看结构”生成SQL语句'],
+ ['向内嵌标识传递字段','relays','[relays=字段，多个以逗号分开/]}','如果需要向嵌套的标识里传递查询变量则要使用此功能']]],
+ ['c','archive','文档内容模块',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['指定文档id(空缺指激活文档)','aid','[aid=文档ID号/] 例：[aid=1/]','设定需要处理的文档ID号，不填写或是0则为激活文档'],
+ ['指向所属合辑','album','不指向合辑：[album=0/]<br />指向其它合辑：[album=合辑ID号/]','选择显示内容的所属合辑类型。不指向合辑，是指非合辑文档'],
+ ['显示模型选项信息','chdata','[chdata=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源']]],
+ ['c','arcscount','文档数量统计',[['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目'],
+ ['含子栏目','caidson','栏目限制含子栏目：[caidson=1/]','显示内容是否包含子栏目内容'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型'],
+ ['文档模型限制','chsource','不限模型：<br />激活模型：[chsource=1/]<br />手动指定模型：[chsource=2/] [chids=文档模型ID，多个以逗号分开/] 例：[chsource=1/] [chids=7,8/]','选择显示内容的所属文档模型','选择显示内容的所属文档模型'],
+ ['会员相关设置'],
+ ['个人文档列表','space','[space=1/]','限制只显示会员发布的信息列表'],
+ ['个人分类限制','ucsource','[ucsource=1/]','限制只显示会员设定的分类信息列表'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['收藏次数>','favorites','[favorites=整数/] 例：[favorites=6/]'],
+ ['称赞次数>','praises','[praises=整数/] 例：[praises=6/]'],
+ ['贬损次数>','debases','[debases=整数/] 例：[debases=6/]'],
+ ['商品订单数量>','orders','[orders=整数/] 例：[orders=6/]'],
+ ['商品价格<=','inprice','[inprice=整数/] 例：[inprice=6/]'],
+ ['商品价格>','outprice','[outprice=整数/] 例：[outprice=6/]'],
+ ['答案数量>','answers','[answers=整数/] 例：[answers=6/]'],
+ ['采用答案数量>','adopts','[adopts=整数/] 例：[adopts=6/]'],
+ ['答疑悬赏积分<=','incurrency','[incurrency=整数/] 例：[incurrency=6/]'],
+ ['答疑悬赏积分>','outcurrency','[outcurrency=整数/] 例：[outcurrency=6/]'],
+ ['答疑是否已关闭','closed','不限：[closed=-1/]<br />未关闭：[closed=0/]<br />已关闭：[closed=1/]']]],
+ ['c','catalogs','类目列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['类目频道属性','urlmode','默认：<br />栏目：[urlmode=caid/]'],
+ ['栏目','casource','全部顶级类目：<br />手支指定类目[casource=1/]，指定类目会附带[caids=类目ID号以逗号分开/]<br />激活类目的一级类目：[casource=2/]<br />激活类目的平级类目：[casource=3/]'],
+ ['列表项目设置','listby','栏目列表项目：[listby=ca/]<br />其它列表项目：[listby=类别体系/]','选择显示内容的所属栏目和类别体系'],
+ ['类目属性(非列表项目有效)'],
+ ['栏目','cainherit','激活栏目：[cainherit=active/]<br />其它栏目：[cainherit=栏目ID号/]']]],
+ ['c','cnode','类目节点',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['类目频道属性','urlmode','默认：<br />栏目：[urlmode=caid/]'],
+ ['栏目','cainherit','激活栏目：[cainherit=active/]<br />其它栏目：[cainherit=栏目ID号/]'],
+ ['列表项目','listby']]],
+ ['c','functions','自定函数列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['列表内容来自以下PHP函数返回值','func','<span class="c9">返回值为列表内容数组，以原始标识形式调用指定内容项，当前页码为{$nowpage}</span>']]],
+ ['c','nownav','类目位置导航',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['类目频道属性','urlmode','默认：<br />栏目：[urlmode=caid/]']]],
+ ['c','context','上下篇',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['上下篇选择','next','上一篇：<br />下一篇：[next=1/]'],
+ ['限于当前模型','chid','[chid=1/]','限制只显示当前文档模型的内容'],
+ ['限于当前栏目','caid','[caid=1/]','限制只显示当前榜上的内容'],
+ ['限于激活会员','mid','[mid=1/]','限制只显示所查看会员组开放权限的文档']]],
+ ['c','acontext','辑内上下篇',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['上下篇选择','next','上一篇：<br />下一篇：[next=1/]'],
+ ['所属合辑类型','atid','[atid=合辑类型ID/]','限制只显示所指定合辑类型'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型']]],
+ ['c','farchives','附属信息列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['分类限制','casource','[casource=附属信息ID/] 例：[casource=2/]'],
+ ['排列顺序','orderby','信息排列升序：[orderby=vieworder_asc/]<br />信息排列降序：[orderby=vieworder_desc/]<br />添加时间降序：[orderby=createdate_desc/]<br />添加时间升序：[orderby=createdate_asc/]'],
+ ['列表起始位','startno','[startno=整数/] 例：[startno=7/]','信息开始查找的初始位置']]],
+ ['c','farchive','信息内容模块',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['指定信息ID(0-激活信息)','aid','[aid=信息ID/]']]],
+ ['c','commus','交互信息列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['添加时间升序排序','orderby','[orderby=1/]'],
+ ['指定交互项目','cuid','评论：[cuid=5/]<br />答疑：[cuid=6/]<br />购买商品：[cuid=7/]','选定标识所属的交互项目'],
+ ['关联ID来源','idsource','文档：[idsource=aid/]<br />会员：[idsource=mid/]'],
+ ['审核状态','checked','不限：[checked=-1/]<br />已审：[checked=1]<br />未审：[checked=0/]','选择显示内容的审核状态']]],
+ ['c','vote','投票模块',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['指定投票ID(0-激活投票)','vid'],
+ ['投票选项列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['投票选项分列数','cols']]],
+ ['c','votes','投票列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['投票分类限制','vsource','不限分类：<br />其它分类：[vsource=投票分类ID/]','选择显示投票内容的类型'],
+ ['投票ID限制(逗号分隔多个内容)','vids','[vids=整数以逗号分开/]','填写投票内容ID号']]],
+ ['c','members','会员列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['基本筛选设置'],
+ ['屏蔽组系筛选','ugid1','不限会员组：[ugid1=0/]<br />其它会员级：[ugid1=会员组ID/]'],
+ ['管理组系筛选','ugid2','不限会员组：[ugid2=0/]<br />其它会员级：[ugid2=会员组ID/]'],
+ ['会员模型限制','chsource','不限模型：<br />激活模型：[chsource=1/]<br />手动指定：[chsource=会员模型ID/]'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['列表排序设置'],
+ ['排序','orderby','value=""默认排序<br />value="m.regdate_desc" 注册时间↓<br />value="m.regdate_asc" 注册时间↑<br />value="m.onlinetime_desc" 在线时间↓<br />value="m.clicks_desc" 点击数↓<br />value="s.msclicks_desc" 空间点击量↓<br />value="s.checks_desc" 发表文档数量↓<br />value="s.comments_desc" 评论数↓<br />value="s.purchases_desc" 购买数量↓<br />value="s.answers_desc" 答疑数量↓<br />value="s.credits_desc" 信用↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['在线时间> ','onlinetime','[onlinetime=整数/] 例：[onlinetime=77/]'],
+ ['空间点击量>','msclicks','[msclicks=整数/] 例：[msclicks=77/]'],
+ ['发表文档数量>','checks','[checks=整数/] 例：[checks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['购买商品数量>','purchases','[purchases=整数/] 例：[purchases=4/]'],
+ ['答疑数量>','answers','[answers=整数/] 例：[answers=4/]'],
+ ['答疑信用>','credits','[credits=整数/] 例：[credits=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['筛选查询字串','wherestr','','SQL判断条件语句，可用系统生成']]],
+ ['c','userinfos','会员信息',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['用户来源','usource','浏览用户：[source=0/]<br />激活用户：[source=1/]','选择显示信息是为浏览用户或是被浏览用户'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源']]],
+ ['c','memscount','会员数量统计',[['基本筛选设置'],
+ ['屏蔽组系筛选','ugid1','不限会员组：[ugid1=0/]<br />其它会员级：[ugid1=会员组ID/]'],
+ ['管理组系筛选','ugid2','不限会员组：[ugid2=0/]<br />其它会员级：[ugid2=会员组ID/]'],
+ ['会员模型限制','chsource','不限模型：<br />激活模型：[chsource=1/]<br />手动指定：[chsource=会员模型ID/]'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['在线时间> ','onlinetime','[onlinetime=整数/] 例：[onlinetime=77/]'],
+ ['空间点击量>','msclicks','[msclicks=整数/] 例：[msclicks=77/]'],
+ ['发表文档数量>','checks','[checks=整数/] 例：[checks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['购买商品数量>','purchases','[purchases=整数/] 例：[purchases=4/]'],
+ ['答疑数量>','answers','[answers=整数/] 例：[answers=4/]'],
+ ['答疑信用>','credits','[credits=整数/] 例：[credits=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['筛选查询字串','wherestr','','SQL判断条件语句，可用系统生成']]],
+ ['c','keywords','关键词列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数']]],
+ ['c','channels','文档模型列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['列表模型','chsource','不限类型：<br />手动指定类型：[chsource=1/] [chids=文档模型ID，多个以逗号分开/] 例：[chsource=1/] [chids=7,8/]','选择显示内容的所属文档模型','选择显示内容的所属文档模型']]],
+ ['c','mchannels','会员模型列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['列表模型','chsource','不限类型：<br />手动指定类型：[chsource=1/] [chids=文档模型ID，多个以逗号分开/] 例：[chsource=1/] [chids=7,8/]','选择显示内容的所属文档模型','选择显示内容的所属文档模型']]],
+ ['c','mcatalogs','类目列表(空间)',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['设置列表项目'],
+ ['栏目','cainherit','激活栏目：[cainherit=active/]<br />其它栏目：[cainherit=栏目ID号/]'],
+ ['列表项目','listby'],
+ ['个人分类','ucsource','value="0" 全部顶级分类']]],
+ ['c','mnownav','类目位置(空间)',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码']]],
+ ['c','subsites','子站列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['列表结果限制','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['列表模型','source','value="0" 全部站点<br />value="1" 全部子站<br />value="2" 手动指定']]],
+ ['p','normal','分页文本',[['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['处理Html代码','dealhtml','[value=clearhtml]:清除Html标签<br />[value=disablehtml/]：仅显示Html标签<br />[value=safehtml/]：保护性过滤Html'],
+ ['过滤不良词','badword','[badword=1/]'],
+ ['处理关联链接','wordlink',' [wordlink=1/]'],
+ ['多行文本换行','nl2br','[nl2br=1/]'],
+ ['添加混淆字串','randstr','[randstr=1/]'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','archives','文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['基本筛选设置'],
+ ['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目'],
+ ['含子栏目','caidson','栏目限制含子栏目：[caidson=1/]','显示内容是否包含子栏目内容'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型'],
+ ['文档模型限制','chsource','激活类型：[chsource=1/]<br />手动指定类型：[chsource=2/]','选择显示内容的所属文档模型'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['显示附加统计信息','rec','[rec=1/]','当需要使用“列表排序设置”中的“第二排序”和显示“第二排序”的信息时需要启用此功能'],
+ ['会员相关设置'],
+ ['个人文档列表','space','[space=1/]','限制只显示会员发布的信息列表'],
+ ['个人分类限制','ucsource','[ucsource=1/]','限制只显示会员设定的分类信息列表'],
+ ['列表排序设置'],
+ ['第一排序','orderby','[orderby=createdate_desc/] 添加时间↓<br />[orderby=createdate_asc/] 添加时间↑<br />[orderby=clicks_desc/] 点击数↓<br />[orderby=comments_desc/] 评论数↓<br />[orderby=scores_desc/] 平均评分↓<br />[orderby=favorites_desc/] 收藏次数↓<br />[orderby=praises_desc/] 称赞次数↓<br />[orderby=debases_desc/] 贬损次数↓<br />[orderby=orders_desc/] 订单数量↓<br />[orderby=downs_desc/] 下载次数↓<br />[orderby=plays_desc/] 播放次数↓<br />[orderby=currency_desc/] 答疑悬赏↓'],
+ ['第二排序','orderby1','[orderby1=mclicks_desc/] 月点击数↓<br />[orderby1=wclicks_desc/] 周点击数↓<br />[orderby1=mcomments_desc/] 月评论数↓<br />[orderby1=wcomments_desc/] 周评论数↓<br />[orderby1=mfavorites_desc/] 月收藏次数↓<br />[orderby1=wfavorites_desc/] 周收藏次数↓<br />[orderby1=mpraises_desc/] 月称赞次数↓<br />[orderby1=wpraises_desc/] 周称赞次数↓<br />[orderby1=mdebases_desc/] 月贬损次数↓<br />[orderby1=wdebases_desc/] 周贬损次数↓<br />[orderby1=morders_desc/] 月订单数量↓<br />[orderby1=worders_desc/] 周订单数量↓<br />[orderby1=mdowns_desc/] 月下载次数↓<br />[orderby1=wdowns_desc/] 周下载次数↓<br />[orderby1=mplays_desc/] 月播放次数↓<br />[orderby1=wplays_desc/] 周播放次数↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['收藏次数>','favorites','[favorites=整数/] 例：[favorites=6/]'],
+ ['称赞次数>','praises','[praises=整数/] 例：[praises=6/]'],
+ ['贬损次数>','debases','[debases=整数/] 例：[debases=6/]'],
+ ['商品订单数量>','orders','[orders=整数/] 例：[orders=6/]'],
+ ['商品价格<=','inprice','[inprice=整数/] 例：[inprice=6/]'],
+ ['商品价格>','outprice','[outprice=整数/] 例：[outprice=6/]'],
+ ['答案数量>','answers','[answers=整数/] 例：[answers=6/]'],
+ ['采用答案数量>','adopts','[adopts=整数/] 例：[adopts=6/]'],
+ ['答疑悬赏积分<=','incurrency','[incurrency=整数/] 例：[incurrency=6/]'],
+ ['答疑悬赏积分>','outcurrency','[outcurrency=整数/] 例：[outcurrency=6/]'],
+ ['答疑是否已关闭','closed','不限：[closed=-1/]<br />未关闭：[closed=0/]<br />已关闭：[closed=1/]'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','alarchives','辑内文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['基本筛选设置'],
+ ['栏目限制','casource','[casource=1/] 手动指定，栏目选定后会出现[caids=选中的栏目ID数字，以“，”号分开/]（例：[caids=36,37/]）<br />[casource=2/] 激活类目<br />[casource=3/] 激活类目的相邻类目','选择显示内容的所属栏目'],
+ ['含子栏目','caidson','栏目限制含子栏目：[caidson=1/]','显示内容是否包含子栏目内容'],
+ ['合辑属性限制','atsource','非合辑文档：<br />全部文档：[atsource=all/]<br />自定义的文档类型：[atsource=文档ID/] 例：[atsource=2/]','选择显示内容的所属合辑类型'],
+ ['文档模型限制','chsource','激活类型：[chsource=1/]<br />手动指定类型：[chsource=2/]','选择显示内容的所属文档模型'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['显示附加统计信息','rec','[rec=1/]','当需要使用“列表排序设置”中的“第二排序”和显示“第二排序”的信息时需要启用此功能'],
+ ['会员相关设置'],
+ ['个人文档列表','space','[space=1/]','限制只显示会员发布的信息列表'],
+ ['个人分类限制','ucsource','[ucsource=1/]','限制只显示会员设定的分类信息列表'],
+ ['列表排序设置'],
+ ['第一排序','orderby','[orderby=createdate_desc/] 添加时间↓<br />[orderby=createdate_asc/] 添加时间↑<br />[orderby=clicks_desc/] 点击数↓<br />[orderby=comments_desc/] 评论数↓<br />[orderby=scores_desc/] 平均评分↓<br />[orderby=favorites_desc/] 收藏次数↓<br />[orderby=praises_desc/] 称赞次数↓<br />[orderby=debases_desc/] 贬损次数↓<br />[orderby=orders_desc/] 订单数量↓<br />[orderby=downs_desc/] 下载次数↓<br />[orderby=plays_desc/] 播放次数↓<br />[orderby=currency_desc/] 答疑悬赏↓'],
+ ['第二排序','orderby1','[orderby1=mclicks_desc/] 月点击数↓<br />[orderby1=wclicks_desc/] 周点击数↓<br />[orderby1=mcomments_desc/] 月评论数↓<br />[orderby1=wcomments_desc/] 周评论数↓<br />[orderby1=mfavorites_desc/] 月收藏次数↓<br />[orderby1=wfavorites_desc/] 周收藏次数↓<br />[orderby1=mpraises_desc/] 月称赞次数↓<br />[orderby1=wpraises_desc/] 周称赞次数↓<br />[orderby1=mdebases_desc/] 月贬损次数↓<br />[orderby1=wdebases_desc/] 周贬损次数↓<br />[orderby1=morders_desc/] 月订单数量↓<br />[orderby1=worders_desc/] 周订单数量↓<br />[orderby1=mdowns_desc/] 月下载次数↓<br />[orderby1=wdowns_desc/] 周下载次数↓<br />[orderby1=mplays_desc/] 月播放次数↓<br />[orderby1=wplays_desc/] 周播放次数↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['列表起始位置','startno',' [startno=整字/] 例：[startno=7/]','设置按当前设置的第几条记录开始，默认为0'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['收藏次数>','favorites','[favorites=整数/] 例：[favorites=6/]'],
+ ['称赞次数>','praises','[praises=整数/] 例：[praises=6/]'],
+ ['贬损次数>','debases','[debases=整数/] 例：[debases=6/]'],
+ ['商品订单数量>','orders','[orders=整数/] 例：[orders=6/]'],
+ ['商品价格<=','inprice','[inprice=整数/] 例：[inprice=6/]'],
+ ['商品价格>','outprice','[outprice=整数/] 例：[outprice=6/]'],
+ ['答案数量>','answers','[answers=整数/] 例：[answers=6/]'],
+ ['采用答案数量>','adopts','[adopts=整数/] 例：[adopts=6/]'],
+ ['答疑悬赏积分<=','incurrency','[incurrency=整数/] 例：[incurrency=6/]'],
+ ['答疑悬赏积分>','outcurrency','[outcurrency=整数/] 例：[outcurrency=6/]'],
+ ['答疑是否已关闭','closed','不限：[closed=-1/]<br />未关闭：[closed=0/]<br />已关闭：[closed=1/]'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','functions','自定函数列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['列表内容来自以下PHP函数返回值','func','<span class="c9">返回值为列表内容数组，以原始标识形式调用指定内容项，当前页码为{$nowpage}</span>'],
+ ['列表项目总数来自以下PHP函数返回值','mpfunc','<span class="c9">返回值为列表项目总数，用于生成分页导航</span>'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','farchives','附属信息列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['分类限制','casource','[casource=附属信息ID/] 例：[casource=2/]'],
+ ['排列顺序','orderby','信息排列升序：[orderby=vieworder_asc/]<br />信息排列降序：[orderby=vieworder_desc/]<br />添加时间降序：[orderby=createdate_desc/]<br />添加时间升序：[orderby=createdate_asc/]'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','images','分页图集',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['分页内容来源标识名','tname','如图片文档的缩略图字段为“thumb”，格式是[tname=thumb/]','填入需要处理的字段标识名称'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['图片宽度限制','width','[maxwidth=数字/] 例：[maxwidth=100/]','限定最大宽度'],
+ ['图片高度限制','height','[maxheight=数字/] 例：[maxheight=200/]]','限定最大高度'],
+ ['小图片扩展','expand','[expand=1/]','当图片宽度和高度同时小于“图片宽度限制”和“图片高度限制”时，图片按比较放大'],
+ ['空图片url','emptyurl','[emptyurl=图片路径/] 例：[emptyurl=userfiles/image/20090513/13114410b51335b0410216.jpg/]','指定图片不存在时所调用的图片'],
+ ['行补全图片说明','emptytitle','[emptytitle=文字说明/] 例：[emptytitle=最新图片/]','指定图片说明为空时的说明']]],
+ ['p','commus','交互信息列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['添加时间升序排序','orderby','[orderby=1/]'],
+ ['指定交互项目','cuid','评论：[cuid=5/]<br />答疑：[cuid=6/]<br />购买商品：[cuid=7/]','选定标识所属的交互项目'],
+ ['关联ID来源','idsource','文档：[idsource=aid/]<br />会员：[idsource=mid/]'],
+ ['审核状态','checked','不限：[checked=-1/]<br />已审：[checked=1]<br />未审：[checked=0/]','选择显示内容的审核状态'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','searchs','搜索文档列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','outinfos','自由调用列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['调用设置'],
+ ['外部数据源','dsid','当前系统：[dsid=0/]<br />其它外部数据源：[dsid=数据源ID/]','能过“模板”->“外部数据源管理”设定外部数据库连接'],
+ ['定义内容查询字串','sqlstr','[sqlstr=SQL语句/]','通过“外部数据源”->“查看结构”生成SQL语句'],
+ ['向内嵌标识传递字段','relays','[relays=字段，多个以逗号分开/]}','如果需要向嵌套的标识里传递查询变量则要使用此功能'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]],
+ ['p','members','会员列表',[['标识模板','template','','调用标识所运行的内容，可填写其它标识，html代码'],
+ ['每页结果数','limits','[limits=数字/] 例：[limits=1000/]','限制显示信息的最大数量'],
+ ['总结果数限制','alimits','[alimits=数字/] 例：[alimits=1000/]','限制显示信息的最大总数'],
+ ['分列数','cols','[cols=数字/] 例：[cols=1/]','限制信息显示的列数'],
+ ['基本筛选设置'],
+ ['屏蔽组系筛选','ugid1','不限会员组：[ugid1=0/]<br />其它会员级：[ugid1=会员组ID/]'],
+ ['管理组系筛选','ugid2','不限会员组：[ugid2=0/]<br />其它会员级：[ugid2=会员组ID/]'],
+ ['会员模型限制','chsource','不限模型：<br />激活模型：[chsource=1/]<br />手动指定：[chsource=会员模型ID/]'],
+ ['显示模型字段信息','detail','[detail=1/]','启用显示文档模型自定义字段的信息，显示此信息时模型必需限制为单个模型，比较耗资源'],
+ ['列表排序设置'],
+ ['排序','orderby','value=""默认排序<br />value="m.regdate_desc" 注册时间↓<br />value="m.regdate_asc" 注册时间↑<br />value="m.onlinetime_desc" 在线时间↓<br />value="m.clicks_desc" 点击数↓<br />value="s.msclicks_desc" 空间点击量↓<br />value="s.checks_desc" 发表文档数量↓<br />value="s.comments_desc" 评论数↓<br />value="s.purchases_desc" 购买数量↓<br />value="s.answers_desc" 答疑数量↓<br />value="s.credits_desc" 信用↓'],
+ ['排序字串','orderstr','','SQL判断条件语句，可用系统生成'],
+ ['更多筛选设置'],
+ ['点击数>','clicks','[clicks=整数/] 例：[clicks=77/]'],
+ ['在线时间> ','onlinetime','[onlinetime=整数/] 例：[onlinetime=47/]'],
+ ['空间点击量>','msclicks','[msclicks=整数/] 例：[msclicks=47/]'],
+ ['发表文档数量>','checks','[checks=整数/] 例：[checks=47/]'],
+ ['评论数>','comments','[comments=整数/] 例：[comments=4/]'],
+ ['购买商品数量>','purchases','[purchases=整数/] 例：[purchases=4/]'],
+ ['答疑数量>','answers','[answers=整数/] 例：[answers=4/]'],
+ ['答疑信用>','credits','[credits=整数/] 例：[credits=4/]'],
+ ['多少天以内添加','indays','[indays=整数/] 例：[indays=5/]'],
+ ['多少天以前添加','outdays','[outdays=整数/] 例：[outdays=6/]'],
+ ['筛选查询字串','wherestr','','SQL判断条件语句，可用系统生成'],
+ ['分页导航设置'],
+ ['是否简易模式','simple','[simple=1/]','启用简易模式'],
+ ['导航页码长度','length','[length=整数/] 例：[length=8/]','限制页码的最大数']]]],i,s='',p='',h=location.hash,oShowItem;
+//<span class="c9"></span>
+for(i=0;i<tpl.length;i++){
+	if(p!=tpl[i][0]){
+		p=tpl[i][0];
+		s+='\n\
+	</div>\n\
+	<div id="item['+p+']" class="i0" style="display:none">';
+	}
+	s+='\n\
+		<a href="#'+p+'_'+tpl[i][1]+'" onclick="showItem(this.href.substr(this.href.lastIndexOf(\'#\')))">'+tpl[i][2]+'</a>';
+}
+s='<div class="tb w2" style="margin:10px auto">\n\
+	<div class="tr">\n\
+		<div id="flag[u]" class="th w1 tbsOn" onclick="showTable(this.id)">特殊标识</div>\n\
+		<div id="flag[c]" class="th w1 tbsOff" onclick="showTable(this.id)">复合标识</div>\n\
+		<div id="flag[p]" class="th w1 tbsOff" onclick="showTable(this.id)">分页标识</div>\n\
+	</div>\n\
+	<div class="tr">'+s.substr(8)+'\n\
+	</div>\n\
+	</div>\n\
+</div>';
+for(i=0;i<tpl.length;i++){
+	s+='\n<div id="'+tpl[i][0]+'_'+tpl[i][1]+'" class="bk" style="display:none">\n\
+	<div class="hd art"><a name="'+tpl[i][0]+'_'+tpl[i][1]+'"></a>'+tpl[i][2]+' '+tpl[i][1]+'</div>\n\
+	<div class="cd">\n\
+		<table width="900" border="0" cellspacing="0" cellpadding="0">\n\
+			<tr>\n\
+				<th class="d1">名称</th>\n\
+				<th class="d2">参数</th>\n\
+				<th class="d3">参数说明</th>\n\
+				<th class="d4">备注</th>\n\
+			</tr>\n\
+		<tr>\n\
+			<td>标识名称</td>\n\
+			<td>cname</td>\n\
+			<td>&nbsp;</td>\n\
+			<td>方便查看标识的用法，不在模版中调用</td>\n\
+		</tr>\n\
+		<tr>\n\
+			<td>英文ID</td>\n\
+			<td>ename</td>\n\
+			<td>1.模版中的调用格式：{标识类型$英文ID标识属性参数}标识调用内容{/标识类型$英文ID}。“{标识类型$英文ID标识属性参数}”是开始符，{/标识类型$英文ID}是结束符<br />\n\
+			2.标识类型分为（u：特殊标识），（c：复合标识），（p：分页标识）；$符号做为标识类型和英文ID的分割符，</td>\n\
+			<td>标识ID由字母,数字及下划线组成,开头字符必为字母</td>\n\
+		</tr>';
+	for(var k=0;k<tpl[i][3].length;k++){
+		var p=tpl[i][3][k];
+		if(1==p.length){
+			s+='\n\
+			<tr>\n\
+				<td colspan="4" class="dc">'+p[0]+'</td>\n\
+			</tr>';
+		}else{
+			s+='\n\
+			<tr>\n\
+				<td>'+p[0]+'</td>\n\
+				<td>'+p[1]+'</td>\n\
+				<td>'+(p[2]?p[2]:'&nbsp;')+'</td>\n\
+				<td>'+(p[3]?p[3]:'&nbsp;')+'</td>\n\
+			</tr>';
+		}
+	}
+	s+='\n\
+		</table>\n\
+	</div>\n\
+</div>';
+}
+document.write(s);
+showTable('flag['+(h?h.substr(1,1):'u')+']');
+showItem(h);
+</script>
+<!--p end-->
+</body>
+</html>

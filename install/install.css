@@ -1,0 +1,74 @@
+*{margin:0;padding:0;}
+a {
+	color: #131395;
+	text-decoration: none
+}
+
+a:hover {
+	color: #131395;
+	text-decoration: underline
+}
+body, table, td {
+	color: #3A4273;
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 12px;
+	line-height: 22px;
+	scrollbar-base-color: #E3E3EA;
+	scrollbar-arrow-color: #5C5C8D
+}
+input{
+	border:solid 1px #A6CBE7;
+	padding:2px 0px 2px 1px;
+	font-family: Tahoma, Verdana, Arial;
+	font-size:1.0em;
+	vertical-align:middle
+}
+.button{
+	border:0px;
+	font: 12px Arial, Helvetica, sans-serif;
+	color:#000;
+	text-align:center;
+	padding-top:3px;
+	width:65px;
+	height:19px;
+	background:url(images/button_bg1.gif) no-repeat;
+}
+.black{color:#000;}
+.red{color:#F00;}
+.headmsg{float:left;width:500px;padding: 5px;}
+.headinfo{float:right;width:50px;padding: 5px;}
+.top{border-bottom:1px solid #D0DBE7;margin-bottom:10px;}
+.l_tbl{border-right:1px solid #D0DBE7;}
+.main{border-top:1px solid #D0DBE7;border-bottom:1px solid #D0DBE7;}
+.install {
+	font-family: Arial, Verdana;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000000
+}
+
+.message {
+	background: #E3E3EA;
+	padding: 20px;
+}
+td.item1, .item1 td {background: #F8F9FC;padding: 0px 8px;}
+td.item2, .item2 td {background: #FFFFFF;padding: 0px 8px;}
+
+.header td {
+	color: #3A4273;
+	font-weight: bold;
+	background-color: #EEF2F5;	
+	text-align: center;
+}
+
+.option td {
+	text-align: center;
+}
+
+.redfont {
+	color: #FF0000;
+}
+.licence{padding:10px;height:380px; overflow:auto;};
+#infos{float:left;padding:10px;width:180px;}
+#steps{float:left;padding:10px;width:180px;}
+

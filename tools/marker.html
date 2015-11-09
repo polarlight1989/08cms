@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../include/js/langs.js"></script>
+<script type="text/javascript" src="../include/js/map_cities.js"></script>
+<style type="text/css">
+.btn_area {margin-top:15px; text-align:center}
+div.button {margin:5px;padding:0 5px;background:#eee;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
+div.button:hover {background:#ddd}
+.determine {float:left}
+.cancel {float:left;margin-left:70px}
+</style>
+</head> 
+<body>
+<div id="map_search" style="display:none">
+<select id="cities" style="width:200px"></select>
+<input id="address" type="text" style="width:365px" value="" onKeyPress="codeKeypress(event)">
+<input id="btn_search" type="button" style="width:60px" onClick="codeAddress()">
+</div>
+<div id="map_canvas" style="width:100%; height:96%"></div>
+<script type="text/javascript">
+var map, old, latLng, marker, undefined;
+var parser = /[?&]([^=]+)(?:=([^&]*))?/g;
+while(query = parser.exec(location.search))window[query[1]] = decodeURIComponent(query[2]);
+var obj = opener._08cms.stack.obj[stack];
+if(!obj || !obj.field)window.close();
+var canvas = document.getElementById("map_canvas");
+var icon = {
+	i_normal : new google.maps.MarkerImage(obj.root+"images/default/marker.png", new google.maps.Size(20, 34), new google.maps.Point(0, 0)),
+	i_moving : new google.maps.MarkerImage(obj.root+"images/default/marker.png", new google.maps.Size(20, 50), new google.maps.Point(0, 0), new google.maps.Point(10, 42)),
+	s_normal : new google.maps.MarkerImage(obj.root+"images/default/marker.png", new google.maps.Size(37, 34), new google.maps.Point(20, 0), new google.maps.Point(10, 34)),
+	s_moving : new google.maps.MarkerImage(obj.root+"images/default/marker.png", new google.maps.Size(37, 34), new google.maps.Point(20, 0), new google.maps.Point(3, 42))
+};
+old = obj.lat != undefined && obj.lng != undefined;
+latLng = old ? new google.maps.LatLng(obj.lat, obj.lng) : new google.maps.LatLng(22.924888973837195, 114.11465746784211);
+
+var determine_marker = function(){
+	infowindow.close();
+	marker._08cms_click = 0;
+	latLng = marker.getPosition();
+	marker.setDraggable(true);
+	old = 1;
+	try{opener._08cms.stack}catch(e){return false}
+	if(!obj.field)return false;
+	obj.lat = latLng.lat().toString();
+	obj.lng = latLng.lng().toString();
+	obj.field.value = obj.lat.slice(0, obj.lat.indexOf('.') + 7) + ',' + obj.lng.slice(0, obj.lng.indexOf('.') + 7);
+	if(obj.info)obj.info.innerHTML = obj.field.value;
+	window.close();
+};
+var cancel_marker = function(){
+	infowindow.close();
+	marker._08cms_click || map.setCenter(latLng);
+	marker._08cms_click = 0;
+	marker.setDraggable(true);
+	if(old){
+		marker.setPosition(latLng);
+	}else{
+		marker.setMap();
+	}
+};
+var infowindow = new google.maps.InfoWindow({
+	content : '<div class="info">' + lang('confirm_marker') + '</div><div class="btn_area"><div class="button determine" onclick="determine_marker()">' + lang('fixed') + '</div><div class="button cancel" onclick="cancel_marker()">' + lang('cancel') + '</div></div>'
+});
+google.maps.event.addListener(infowindow, 'closeclick', cancel_marker);
+
+map = new google.maps.Map(canvas, {
+	zoom: obj.zoom && obj.zoom.match(/^[3-9]$|^1\d$/) ? parseInt(obj.zoom) : 13, //0-19
+	center: latLng,/*
+	mapTypeControl: false,/*/ 
+	mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},//*DEFAULT,DROPDOWN_MENU,HORIZONTAL_BAR*/
+//	    scaleControl: true,
+	navigationControlOptions: {
+		style: google.maps.NavigationControlStyle.ZOOM_PAN//DEFAULT,ANDROID,SMALL,ZOOM_PAN
+//		position: google.maps.ControlPosition.TOP_LEFT//TOP,TOP_LEFT,TOP_RIGHT,BOTTOM,BOTTOM_LEFT,BOTTOM_RIGHT,LEFT,RIGHT
+	},
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+marker = new google.maps.Marker({
+	map : old ? map : null,
+	icon : icon.normal,
+	position : latLng,
+	draggable : true
+});
+
+var marker_dragend = function(e){
+	this.setIcon(icon.i_normal);
+	this.setShadow(icon.s_normal);
+	this.setDraggable(false);
+	map.setCenter(this.getPosition());
+	infowindow.setPosition(this.getPosition());
+	infowindow.open(map);
+};
+google.maps.event.addListener(marker, "mouseover", function(){
+	if(!this.draggable)return;
+	this.setIcon(icon.i_moving);
+	this.setShadow(icon.s_moving);
+});/*
+google.maps.event.addListener(marker, "dragstart", function(){
+	this.oLatlng = this.getPosition();
+});*/
+google.maps.event.addListener(marker, "dragend", marker_dragend);
+google.maps.event.addListener(marker, "mouseout", function(){
+	if(latLng && latLng != this.getPosition())return;
+	this.setIcon(icon.i_normal);
+	this.setShadow(icon.s_normal);
+});
+google.maps.event.addListener(map, "click", function(e){
+	if(!marker.draggable)return;
+	if(!marker.clickTimer){
+		marker.clickTimer = setTimeout(function(){
+			if(!old)marker.setMap(map);
+			marker._08cms_click = 1;
+			marker.setPosition(e.latLng);
+			marker_dragend.call(marker, e);
+			marker.clickTimer = null;
+		}, 200);
+	}
+});
+google.maps.event.addListener(map, "dblclick", function(e){
+	clearTimeout(marker.clickTimer);
+	marker.clickTimer = null;
+});
+
+//区域
+if(window._08cms && _08cms.cities){
+	document.getElementById('btn_search').value = lang('btn_search');
+	document.getElementById('map_search').style.display = '';
+	var select = document.getElementById('cities');
+	google.maps.event.addDomListener(select, 'change', function(){
+		var city = _08cms.cities[this.options[this.selectedIndex].value];
+		var center = new google.maps.LatLng(city.latlng[0], city.latlng[1]);
+		map.setCenter(center);
+	});
+	for(var i = 0; i < _08cms.cities.length; i++){
+		var option = new Option(_08cms.cities[i].name, i);
+		select.options[i] = option;
+	}
+}
+
+//搜索
+var geocoder = new google.maps.Geocoder();
+function codeAddress() {
+	var i, infowindow, address = document.getElementById("address").value,
+		rounds = document.getElementById('cities'),
+		counts = 0;
+	rounds = _08cms.cities[rounds.options[rounds.selectedIndex].value].rounds;
+	if (geocoder) {
+		geocoder.geocode({
+			address: address,
+			bounds : new google.maps.LatLngBounds(new google.maps.LatLng(rounds[2], rounds[3]), new google.maps.LatLng(rounds[0], rounds[1])),
+			region : 'cn'
+			}, function(results, status) {
+			if(status == google.maps.GeocoderStatus.OK){
+				if(geocoder._infowindows)for(i in geocoder._infowindows)geocoder._infowindows[i].close();
+				geocoder._infowindows = {};
+				for(i in results){
+//					var arr = results[i].address_components;
+					var lat = results[i].geometry.location.lat(), lng = results[i].geometry.location.lng();
+					if(lat > rounds[0] || lat < rounds[2] || lng > rounds[1] || lng < rounds[3])continue;
+					geocoder._infowindows[results[i].formatted_address] =  infowindow = new google.maps.InfoWindow({
+							content: results[i].formatted_address,
+//							size: new google.maps.Size(50,50), 
+							position: results[i].geometry.location
+						}); 
+					infowindow.open(map);
+					counts++;
+				}
+				if(counts)return map.panTo(results[0].geometry.location);
+			}
+			counts || alert(lang('not_find_place'));
+		});
+	}
+}
+function codeKeypress(e){
+//	e = e ? e : window.event;
+	actualCode = e.keyCode ? e.keyCode : e.charCode;
+	actualCode == 13 && codeAddress();
+}
+setInterval(function(){try{opener._08cms.stack}catch(e){window.close()}}, 50);//When the opener refresh
+</script> 
+</body> 
+</html>
